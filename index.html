@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>汤姆猫</title>
+    <link href="css/cat.css" rel="stylesheet"/>
+    <link href="css/public.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="tomAnimate">
+    <span><img src="images/Angry/angry_0.jpg" id="back"/></span>
+    <button class="tomBtn knockout"></button>
+    <button id="cymbal" class="tomBtn cymbal" onclick="cymbal()"></button>
+    <button id="drink" class="tomBtn drink" onclick="drink()"></button>
+    <button id="eat" class="tomBtn eat" onclick="eat()"></button>
+    <button id="fart" class="tomBtn fart" onclick="fart()"></button>
+    <button id="pie" class="tomBtn pie" onclick="pie()"></button>
+    <button id="scratch" class="tomBtn scratch" onclick="scratch()"></button>
+    <audio id="audio"></audio>
+</div>
+</body>
+<script type="text/javascript">
+    var audio = document.getElementById('audio');
+    var img = document.getElementById('back');
+    var i = 0;
+    function cymbal() {
+        base('audio/cymbal.wav',100,'images/Cymbal/cymbal_',12,'cymbal');
+    }
+    function drink() {
+        setTimeout(function () {
+            audio.src='audio/pour_milk.wav';
+            audio.play();
+        },2000);
+        base('audio/p_drink_milk.wav',4000,'images/Drink/drink_',80,'drink');
+    }
+    function eat() {
+        base('audio/p_eat.wav',1000,'images/Eat/eat_',39,'eat');
+    }
+    function fart() {
+        base('audio/fart001_11025.wav',600,'images/Fart/fart_',27,'fart');
+    }
+    function pie() {
+        base('audio/slap6.wav',600,'images/Pie/pie_',23,'pie');
+    }
+    function scratch() {
+        base('audio/scratch_kratzen.wav',2000,'images/Scratch/scratch_',55,'scratch');
+    }
+    function base(audioSrc,timeoutNum,imgSrc,imgNum,id) {
+        setTimeout(function () {
+            audio.src = audioSrc;
+            audio.autoplay = 'autoplay';
+        },timeoutNum);
+        var timer = setInterval(function () {
+            img.src = imgSrc + i + '.jpg';
+            i++;
+            if(i<=imgNum){
+                document.getElementById(id).disable=true;
+            }
+            else{
+                document.getElementById(id).disable=false;
+                clearInterval(timer);
+                i=0;
+            }
+        }, 100);
+    }
+</script>
+</html>
